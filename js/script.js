@@ -1,5 +1,25 @@
 $(document).ready(function(){
     generateBingoCard();
+    $(".square").on("contextmenu", function(e) {
+        e.preventDefault();
+        $(this).children(".starred").toggle();
+    });
+    $(".square").on("click", function(ev) {
+        console.log("Cenas");
+        $(this).toggleClass("greensquare");
+    });
+    addRowHover("row1");
+    addRowHover("row2");
+    addRowHover("row3");
+    addRowHover("row4");
+    addRowHover("row5");
+    addRowHover("col1");
+    addRowHover("col2");
+    addRowHover("col3");
+    addRowHover("col4");
+    addRowHover("col5");
+    addRowHover("tlbr");
+    addRowHover("bltr");
 });
 
 function generateBingoCard() {
@@ -25,7 +45,7 @@ function generateBingoCard() {
     var goals18 = ["Articuno, Zapdos or Moltres", "Mew or Mewtwo", "6 Different Poison type Pokemon", "6 Different Water-type Pokemon", "6 Different Normal-type Pokemon"];
     var goals19 = ["Faint Chansey", "Faint Snorlax", "A Pokemon with Quick Attack  ", "TM10 or TM30"];
     var goals20 = ["Defeat 2 Engineers", "Defeat 4 Beauties", "Defeat 2 Rockers", "Pickup and keep an item that contains the word Max", "PP Healing Item"];
-    var goals21 = ["90 Pokemon seen", "Catch 5 Different Pokemon in the Safari Zone", "Push a Boulder", "6 Different Pokemon not sharing any types", "Catch a Pokemon in Route 23."];
+    var goals21 = ["90 Pokemon seen", "Catch 5 Different Pokemon in the Safari Zone", "Push a Boulder", "6 Different Pokemon not sharing any types", "Catch a Pokemon in Route 23"];
     var goals22 = ["Evolve a Pokemon at level 30 or higher", "Stop the same Pokémon evolving 4 times", "Defeat Rival in the S.S.Anne", "Faint Lapras"];
     var goals23 = ["Pokemon with 4 No-PP-left moves", "Fill a PC Box", "4 different level 30 Pokemon", "Master Ball"];
     var goals24 = ["Defeat all trainers in each Gym you enter", "Defeat 3 Burglars", "Defeat 3 Scientists", "TM31 (Mimic)"];
@@ -63,7 +83,7 @@ function copyJSON(bingocard){
 
 function changeGoals(bingoCard){
     for(var i = 0; i < bingoCard.length; ++i) {
-        $("#slot"+(i+1)).html(bingoCard[i]);
+        $("#slot"+(i+1)).html("<div hidden class=\"starred\"></div><div class=\"text\">"+bingoCard[i]+"</div>");
     }
 }
 
@@ -126,4 +146,15 @@ function shuffleArray(ar){
         ar[index] = ar[i];
         ar[i] = a;
     }
+}
+
+function addRowHover(name) {
+    $("#bingo").find("#" + name).hover(
+        function() {
+            $("#bingo").find("." + name).addClass("hover");
+        },
+        function() {
+            $("#bingo").find("." + name).removeClass("hover");
+        }
+    );
 }
