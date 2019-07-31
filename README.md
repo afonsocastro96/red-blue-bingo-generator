@@ -1,1 +1,1 @@
-# red-blue-bingo-generator
+# red_bingo
